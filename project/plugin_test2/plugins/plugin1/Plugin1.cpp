@@ -15,8 +15,8 @@ string Plugin1::getMessage(){
 
 extern "C"
 {
-    Add_Plugin *make_Add_Plugin()
+    Plugin1 *make_Add_Plugin()
     {
-        return new Add_Plugin();
+        return new Plugin1();
     }
 }

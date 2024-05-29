@@ -7,6 +7,7 @@ using namespace std;
 
 class Plugin1 : public Add_Plugin {
 	public:
+		Plugin1() {};
 		virtual string getName();
 		virtual string getMessage();
 };

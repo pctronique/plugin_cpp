@@ -17,16 +17,16 @@ Main_plugin::Main_plugin() {
     func = "make_Add_Plugin";
     fs::path filepath = path;
     if(fs::is_directory(filepath.parent_path())) {
-        for (const auto & entry : fs::directory_iterator(path)) {
+        for (const auto & entry : fs::directory_iterator(filepath.parent_path())) {
+            cout << entry.path().c_str() << "\n";
             bool noterror = true;
             plibobj = dlopen(entry.path().c_str(), RTLD_LAZY);
             // If there is an error, output it and exit
-            /*if (!plibobj) {
+            if (!plibobj) {
                 cerr << "Error loading the library " << entry.path() << " - " << dlerror() << "\n";
-                noterror = false;
+                //noterror = false;
             }
             //Clear any error
-            dlerror();*/
 
             if(noterror) {
                 // Here we get the pointer of our target function, it is just a pointer to an undefined object
@@ -44,6 +44,8 @@ Main_plugin::Main_plugin() {
                     //all_plugin.push_back(add_plugin);
                 }
             }
+
+            dlerror();
 
 
             /*all_plugin.push_back(buf);
