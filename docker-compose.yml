@@ -1,0 +1,15 @@
+services:
+###########################
+# Setup the PHP container
+###########################
+    linux_gcc:
+        container_name: ${NAME_PROJECT}_gcc
+        restart: always
+        build: 
+            context: ./.docker/images/linux_gcc/
+            args:
+                - VALUE_GCC_VERSION=${VALUE_GCC_VERSION}
+        tty: true
+        stdin_open: true
+        volumes:
+            - ./project:/home/project:rw
