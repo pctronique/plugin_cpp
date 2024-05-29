@@ -4,9 +4,9 @@
 
 #!/bin/sh
 
-cd static
-./comp.sh
-cd ../testplugin
-./comp.sh
-cd ../plugins/plugin1
-./comp.sh
+mkdir build
+cd build
+cmake ../
+make
+cd ..
+rm -r build

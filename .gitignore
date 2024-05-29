@@ -1,4 +1,9 @@
 /.env
 /project/build/
 /project/dist/
+/project/plugin_test2/build/
 /project/plugin_test2/dist/
+/project/test021/build/
+/project/test021/dist/
+/project/test027/build/
+/project/test027/dist/

@@ -14,20 +14,19 @@ namespace fs = filesystem;
 Main_plugin::Main_plugin() {
     void * plibobj;
     string func;
-    func = "getName";
+    func = "make_Add_Plugin";
     fs::path filepath = path;
     if(fs::is_directory(filepath.parent_path())) {
         for (const auto & entry : fs::directory_iterator(path)) {
             bool noterror = true;
-            cout << entry.path() << "\n";
             plibobj = dlopen(entry.path().c_str(), RTLD_LAZY);
             // If there is an error, output it and exit
-            if (!plibobj) {
+            /*if (!plibobj) {
                 cerr << "Error loading the library " << entry.path() << " - " << dlerror() << "\n";
                 noterror = false;
             }
             //Clear any error
-            dlerror();
+            dlerror();*/
 
             if(noterror) {
                 // Here we get the pointer of our target function, it is just a pointer to an undefined object
@@ -36,10 +35,13 @@ Main_plugin::Main_plugin() {
                 // Again, if there is an error accessing the symbol, output it and exit
                 if (psqr == NULL) {
                     cerr << "Error accessing the symbol:" << func << dlerror() << "\n";
-                    exit(EXIT_FAILURE);
                 } else {
-                    Add_Plugin* add_plugin = reinterpret_cast<decltype(add_plugin)>(psqr);
-                    all_plugin.push_back(add_plugin);
+                    maker_Add_Plugin pMaker;
+                    pMaker = (maker_Add_Plugin)psqr;
+                    Add_Plugin *add_plugin = pMaker();
+                    cout << add_plugin->isPlugin() << "\n";
+                    cout << add_plugin->getName() << "\n";
+                    //all_plugin.push_back(add_plugin);
                 }
             }
 

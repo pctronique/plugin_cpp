@@ -1,16 +1,19 @@
 #include <iostream>
 #include <string>
-#include <Plugin1.hpp>
 #include <Add_Plugin.hpp>
 
 using namespace std;
 
-string Plugin1::getName() {
-    return "plugin1";
+string Add_Plugin::getName() {
+    return "";
 }
 
-string Plugin1::getMessage(){
-    return "the plugin1";
+string Add_Plugin::getMessage(){
+    return "";
+}
+
+bool Add_Plugin::isPlugin(){
+    return true;
 }
 
 extern "C"

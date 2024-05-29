@@ -1,18 +1,14 @@
 #ifndef PLUGIN1_H
 #define PLUGIN1_H
 
-//#include <Add_Plugin.hpp>
-#include <string>
-#include <vector>
+#include <Add_Plugin.hpp>
 
 using namespace std;
 
-class Plugin1 : public Add_Plugin
-{
+class Plugin1 : public Add_Plugin {
 	public:
-		string getName(){ return ""; };
-		string getMessage(){ return ""; };
-		bool isPlugin(){ return true; };
+		virtual string getName();
+		virtual string getMessage();
 };
 
 #endif
