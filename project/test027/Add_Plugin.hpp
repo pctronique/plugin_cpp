@@ -8,11 +8,9 @@ using namespace std;
 class Add_Plugin
 {
 	public:
-		virtual string getName();
-		virtual string getMessage();
-		virtual bool isPlugin();
+		virtual string getName() { return "tintin021"; };
+		virtual string getMessage(){ return ""; };
+		virtual bool isPlugin(){ return true; };
 };
- 
-typedef Add_Plugin *(*maker_Add_Plugin)();
 
 #endif

@@ -15,4 +15,12 @@ class Add_Plugin
  
 typedef Add_Plugin *(*maker_Add_Plugin)();
 
+extern "C"
+{
+    Add_Plugin *make_Add_Plugin()
+    {
+        return new Add_Plugin();
+    }
+}
+
 #endif

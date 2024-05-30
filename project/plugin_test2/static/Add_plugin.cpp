@@ -4,7 +4,7 @@
 
 using namespace std;
 
-string Add_Plugin::getName() {
+/*string Add_Plugin::getName() {
     return "";
 }
 
@@ -14,12 +14,12 @@ string Add_Plugin::getMessage(){
 
 bool Add_Plugin::isPlugin(){
     return true;
-}
+}*/
 
-extern "C"
+/*extern "C"
 {
     Add_Plugin *make_Add_Plugin()
     {
         return new Add_Plugin();
     }
-}
+}*/
