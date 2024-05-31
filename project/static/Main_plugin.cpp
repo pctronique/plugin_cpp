@@ -4,17 +4,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <dlfcn.h>
-#include <Add_Plugin.hpp>
+#include <AddPluginInterface.hpp>
 #include <Main_plugin.hpp>
 
 using namespace std;
 namespace fs = filesystem;
-typedef Add_Plugin *(*maker_add_plugin)();
+typedef AddPluginInterface *(*maker_AddPluginInterface)();
 
 Main_plugin::Main_plugin() {
     void * plibobj;
     string func;
-    func = "make_add_plugin";
+    func = "make_AddPluginInterface";
     fs::path filepath = path;
     if(fs::is_directory(filepath.parent_path())) {
         for (const auto & entry : fs::directory_iterator(filepath.parent_path())) {
@@ -24,14 +24,14 @@ Main_plugin::Main_plugin() {
                 cerr << "Error loading the library " << entry.path() << " - " << dlerror() << "\n";
             } else {
                 // Here we get the pointer of our target function, it is just a pointer to an undefined object
-                maker_add_plugin psqr = (maker_add_plugin)dlsym(plibobj, "make_add_plugin");
+                maker_AddPluginInterface psqr = (maker_AddPluginInterface)dlsym(plibobj, "make_AddPluginInterface");
                 
                 // Again, if there is an error accessing the symbol, output it and exit
                 if (psqr == NULL) {
                     cerr << "Error accessing the symbol:" << func << dlerror() << "\n";
                 } else {
-                    Add_Plugin* add_plugin = psqr();
-                    all_plugin.push_back(add_plugin);
+                    AddPluginInterface* AddPluginInterface = psqr();
+                    all_plugin.push_back(AddPluginInterface);
                 }
             }
             //dlclose(plibobj);
@@ -39,7 +39,7 @@ Main_plugin::Main_plugin() {
     }
 }
 
-vector<Add_Plugin*> Main_plugin::getPlugins(){
+vector<AddPluginInterface*> Main_plugin::getPlugins(){
     return all_plugin;
 }
 

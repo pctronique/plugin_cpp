@@ -15,7 +15,7 @@ set(STATIC_PLUGIN_SRCS Main_plugin.cpp)
 include_directories(${STATIC_PLUGIN_SOURCE_DIR})
 
 add_library (${LIB_STATIC_PLUGIN} STATIC ${STATIC_PLUGIN_SRCS})
-file(COPY ${STATIC_PLUGIN_SOURCE_DIR}/Add_Plugin.hpp DESTINATION ${PATH_DIST}/include)
+file(COPY ${STATIC_PLUGIN_SOURCE_DIR}/AddPluginInterface.hpp DESTINATION ${PATH_DIST}/include)
 file(COPY ${STATIC_PLUGIN_SOURCE_DIR}/Main_plugin.hpp DESTINATION ${PATH_DIST}/include)
 
 #********** end CmakeLists.txt **********

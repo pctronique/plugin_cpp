@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <Plugin1.hpp>
-#include <Add_Plugin.hpp>
+#include <AddPluginInterface.hpp>
 
 using namespace std;
 
@@ -15,7 +15,7 @@ string Plugin1::getMessage(){
 
 extern "C"
 {
-    Add_Plugin *make_add_plugin()
+    AddPluginInterface *make_AddPluginInterface()
     {
         return new Plugin1();
     }

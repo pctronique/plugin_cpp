@@ -1,11 +1,11 @@
 #ifndef PLUGIN1_H
 #define PLUGIN1_H
 
-#include <Add_Plugin.hpp>
+#include <AddPluginInterface.hpp>
 
 using namespace std;
 
-class Plugin2 : public Add_Plugin {
+class Plugin2 : public AddPluginInterface {
 	public:
 		virtual string getName();
 		virtual string getMessage();
@@ -13,7 +13,7 @@ class Plugin2 : public Add_Plugin {
 
 extern "C"
 {
-    Add_Plugin *make_add_plugin()
+    AddPluginInterface *make_AddPluginInterface()
     {
         return new Plugin2();
     }

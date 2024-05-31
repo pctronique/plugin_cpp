@@ -1,7 +1,7 @@
 #ifndef MAIN_PLUGIN_H
 #define MAIN_PLUGIN_H
 
-#include <Add_Plugin.hpp>
+#include <AddPluginInterface.hpp>
 #include <string>
 #include <vector>
 
@@ -11,9 +11,9 @@ class Main_plugin
 {
 	public:
 		Main_plugin();
-		vector<Add_Plugin*> getPlugins();
+		vector<AddPluginInterface*> getPlugins();
 	private:
-		vector<Add_Plugin*> all_plugin;
+		vector<AddPluginInterface*> all_plugin;
 		string path = "./plugins/";
 };
 

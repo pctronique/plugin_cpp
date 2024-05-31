@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <Plugin2.hpp>
-#include <Add_Plugin.hpp>
+#include <AddPluginInterface.hpp>
 
 using namespace std;
 

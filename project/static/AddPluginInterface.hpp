@@ -1,11 +1,11 @@
-#ifndef ADD_PLUGIN_H
-#define ADD_PLUGIN_H
+#ifndef ADDPLUGININTERFACE_H
+#define ADDPLUGININTERFACE_H
 
 #include <string>
 
 using namespace std;
 
-class Add_Plugin
+class AddPluginInterface
 {
 	public:
 		virtual string getName() = 0;
@@ -15,7 +15,7 @@ class Add_Plugin
 /*
 extern "C"
 {
-    Add_Plugin *make_add_plugin()
+    AddPluginInterface *make_AddPluginInterface()
     {
         return new Name_Plugin();
     }

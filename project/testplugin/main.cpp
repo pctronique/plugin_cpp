@@ -4,8 +4,8 @@
 
 int main() {
     Main_plugin main_plugin;
-    for (Add_Plugin* add_plugin : main_plugin.getPlugins()) {
-        cout << add_plugin->getName() << " : " << add_plugin->getMessage() << "\n";
+    for (AddPluginInterface* AddPluginInterface : main_plugin.getPlugins()) {
+        cout << AddPluginInterface->getName() << " : " << AddPluginInterface->getMessage() << "\n";
     }
     return 0;
 }
