@@ -20,7 +20,7 @@ Main_plugin::Main_plugin() {
         for (const auto & entry : fs::directory_iterator(filepath.parent_path())) {
             plibobj = dlopen(entry.path().c_str(), RTLD_LAZY);
             // If there is an error, output it and exit
-            if (!plibobj) {
+            if (plibobj == NULL) {
                 cerr << "Error loading the library " << entry.path() << " - " << dlerror() << "\n";
             } else {
                 // Here we get the pointer of our target function, it is just a pointer to an undefined object
