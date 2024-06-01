@@ -8,7 +8,6 @@ using namespace std;
 class AddPluginInterface
 {
 	public:
-        AddPluginInterface(){};
 		virtual string getName() = 0;
 		virtual string getMessage() = 0;
 };
