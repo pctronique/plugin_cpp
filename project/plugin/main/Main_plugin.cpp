@@ -17,7 +17,7 @@ typedef AddPluginInterface *(*maker_AddPluginInterface)();
 
 Main_plugin Main_plugin::loadPlugins(string folder) {
 	#ifdef _WIN32
-		FARPROC plibobj;
+		HINSTANCE plibobj;
 	#else
 		void* plibobj;
 	#endif
@@ -30,7 +30,7 @@ Main_plugin Main_plugin::loadPlugins(string folder) {
     if(fs::is_directory(filepath.parent_path())) {
         for (const auto & entry : fs::directory_iterator(filepath.parent_path())) {
             #ifdef _WIN32
-                plibobj = LoadLibrary(TEXT(entry.path().c_str()));
+                plibobj = LoadLibrary(LPCSTR(entry.path().c_str()));
             #else
                 plibobj = dlopen(entry.path().c_str(), RTLD_LAZY|RTLD_GLOBAL|RTLD_LOCAL);
             #endif
