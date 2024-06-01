@@ -4,7 +4,11 @@
 #include <AddPluginInterface.hpp>
 #include <string>
 #include <vector>
-#include <dlfcn.h>
+#ifdef _WIN32
+    #include <windows.h>
+#else
+    #include <dlfcn.h>
+#endif
 
 using namespace std;
 
@@ -17,7 +21,11 @@ class Main_plugin
 	private:
 		vector<AddPluginInterface *> all_plugin;
 		string path = "./plugins/";
-		void * plibobj;
+		#ifdef _WIN32
+			FARPROC plibobj;
+		#else
+			void* plibobj;
+		#endif
 };
 
 #endif
