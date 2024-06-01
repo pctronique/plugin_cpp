@@ -11,7 +11,7 @@ using namespace std;
 namespace fs = filesystem;
 typedef AddPluginInterface *(*maker_AddPluginInterface)();
 
-void Main_plugin::loadPlugins(string folder) {
+Main_plugin Main_plugin::loadPlugins(string folder) {
     void * plibobj;
     string func;
     func = "make_AddPluginInterface";
@@ -40,6 +40,7 @@ void Main_plugin::loadPlugins(string folder) {
             //dlclose(plibobj);
         }
     }
+    return *this;
 }
 
 vector<AddPluginInterface*> Main_plugin::getPlugins(){
