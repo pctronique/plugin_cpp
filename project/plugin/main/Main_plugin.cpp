@@ -16,6 +16,11 @@ namespace fs = filesystem;
 typedef AddPluginInterface *(*maker_AddPluginInterface)();
 
 Main_plugin Main_plugin::loadPlugins(string folder) {
+	#ifdef _WIN32
+		FARPROC plibobj;
+	#else
+		void* plibobj;
+	#endif
     string func;
     func = "make_AddPluginInterface";
     if(folder.c_str() != NULL && folder != "") {
@@ -51,7 +56,6 @@ Main_plugin Main_plugin::loadPlugins(string folder) {
                     #else
                         cerr << "Error accessing the symbol:" << func << dlerror() << "\n";
                     #endif
-                    
                 } else {
                     AddPluginInterface* addPluginInterface = psqr();
                     all_plugin.push_back(addPluginInterface);
