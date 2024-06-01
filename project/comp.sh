@@ -6,9 +6,9 @@
 
 cd ${0%/*}
 
-cd static
+cd plugin/main
 chmod 777 comp.sh
 ./comp.sh
-cd ../testplugin
+cd ../../testplugin
 chmod 777 comp.sh
 ./comp.sh

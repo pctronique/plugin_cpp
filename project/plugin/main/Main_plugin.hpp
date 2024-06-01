@@ -4,17 +4,20 @@
 #include <AddPluginInterface.hpp>
 #include <string>
 #include <vector>
+#include <dlfcn.h>
 
 using namespace std;
 
 class Main_plugin
 {
 	public:
-		Main_plugin();
-		vector<AddPluginInterface*> getPlugins();
+		Main_plugin(){};
+		void loadPlugins(string folder = "");
+		vector<AddPluginInterface *> getPlugins();
 	private:
-		vector<AddPluginInterface*> all_plugin;
+		vector<AddPluginInterface *> all_plugin;
 		string path = "./plugins/";
+		void * plibobj;
 };
 
 #endif
