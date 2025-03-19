@@ -1,12 +1,14 @@
 #include <iostream>
 #include <string>
-#include <Main_plugin.hpp>
+#include <PctrPlugin.hpp>
+#include <AddPluginInterface.hpp>
 
 int main() {
-    Main_plugin main_plugin;
+    PctrPlugin main_plugin = PctrPlugin("AddPluginInterface");
     main_plugin.loadPlugins();
-    for (AddPluginInterface* addPluginInterface : main_plugin.getPlugins()) {
-        cout << addPluginInterface->getName() << " : " << addPluginInterface->getMessage() << "\n";
+    for (void* addPluginInterface : main_plugin.getPlugins()) {
+
+        cout << ((AddPluginInterface*)addPluginInterface)->getName() << " : " << ((AddPluginInterface*)addPluginInterface)->getMessage() << "\n";
     }
     return 0; 
 }

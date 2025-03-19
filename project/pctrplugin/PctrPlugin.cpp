@@ -8,23 +8,24 @@
 #else
     #include <dlfcn.h>
 #endif
-#include <AddPluginInterface.hpp>
-#include <Main_plugin.hpp>
+#include <PctrPlugin.hpp>
 
 using namespace std;
 namespace fs = filesystem;
-typedef AddPluginInterface* (*maker_Plugin)();
+typedef void* (*maker_Plugin)();
 
-Main_plugin Main_plugin::loadPlugins(string folder) {
+PctrPlugin::PctrPlugin(string nameInterf) {
+    nameInterfLd = nameInterf;
+}
+
+PctrPlugin PctrPlugin::loadPlugins(string folder) {
     #ifdef _WIN32
         HINSTANCE plibobj;
     #else
         void* plibobj;
     #endif
-    string nameInterf;
-    nameInterf = "AddPluginInterface";
     string func;
-    func = "make_"+nameInterf;
+    func = "make_"+nameInterfLd;
     if(folder.c_str() != NULL && folder != "") {
         path = folder;
     }
@@ -59,8 +60,8 @@ Main_plugin Main_plugin::loadPlugins(string folder) {
                         cerr << "Error accessing the symbol:" << func.c_str() << dlerror() << "\n";
                     #endif
                 } else {
-                    AddPluginInterface* addPluginInterface = psqr();
-                    all_plugin.push_back(addPluginInterface);
+                    void* pluginOne = psqr();
+                    all_plugin.push_back(pluginOne);
                 }
             }
             /*
@@ -75,6 +76,6 @@ Main_plugin Main_plugin::loadPlugins(string folder) {
     return *this;
 }
 
-vector<AddPluginInterface*> Main_plugin::getPlugins(){
+vector<void*> PctrPlugin::getPlugins(){
     return all_plugin;
 }

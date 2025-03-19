@@ -12,14 +12,4 @@ class AddPluginInterface
 		virtual string getMessage() = 0;
 };
 
-/*
-extern "C"
-{
-    AddPluginInterface *make_AddPluginInterface()
-    {
-        return new Name_Plugin();
-    }
-}
-*/
-
 #endif
