@@ -12,9 +12,9 @@ class Main_plugin
 	public:
 		Main_plugin(){};
 		Main_plugin loadPlugins(string folder = "");
-		vector<AddPluginInterface *> getPlugins();
+		vector<AddPluginInterface*> getPlugins();
 	private:
-		vector<AddPluginInterface *> all_plugin;
+		vector<AddPluginInterface*> all_plugin;
 		string path = "./plugins/";
 };
 

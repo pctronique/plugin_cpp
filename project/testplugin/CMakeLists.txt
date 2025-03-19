@@ -13,6 +13,7 @@ set(PATH_DIST ${TEST_PLUGIN_SOURCE_DIR}/../dist)
 set(LIB_STATIC_PLUGIN pluginstatic)
 set(EXECUTABLE_OUTPUT_PATH ${PATH_DIST}/bin)
 
+#set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--as-needed")
 set(CMAKE_CXX_FLAGS "-fno-gnu-unique")
 
 link_directories(${PATH_DIST}/lib)
