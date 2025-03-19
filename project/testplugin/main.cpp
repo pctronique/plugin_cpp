@@ -10,5 +10,6 @@ int main() {
 
         cout << ((AddPluginInterface*)addPluginInterface)->getName() << " : " << ((AddPluginInterface*)addPluginInterface)->getMessage() << "\n";
     }
+    main_plugin.closeLoad();
     return 0; 
 }

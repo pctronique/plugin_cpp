@@ -10,6 +10,12 @@
 #endif
 #include <PctrPlugin.hpp>
 
+#ifdef _WIN32
+    HINSTANCE plibobj;
+#else
+    void* plibobj;
+#endif
+
 using namespace std;
 namespace fs = filesystem;
 typedef void* (*maker_Plugin)();
@@ -19,11 +25,6 @@ PctrPlugin::PctrPlugin(string nameInterf) {
 }
 
 PctrPlugin PctrPlugin::loadPlugins(string folder) {
-    #ifdef _WIN32
-        HINSTANCE plibobj;
-    #else
-        void* plibobj;
-    #endif
     string func;
     func = "make_"+nameInterfLd;
     if(folder.c_str() != NULL && folder != "") {
@@ -64,16 +65,19 @@ PctrPlugin PctrPlugin::loadPlugins(string folder) {
                     all_plugin.push_back(pluginOne);
                 }
             }
-            /*
-            #ifdef _WIN32
-                FreeLibrary(plibobj);
-            #else
-                dlclose(plibobj);
-            #endif
-            */
         }
     }
     return *this;
+}
+
+void PctrPlugin::closeLoad() {
+    if(plibobj != NULL) {
+        #ifdef _WIN32
+            FreeLibrary(plibobj);
+        #else
+            dlclose(plibobj);
+        #endif
+    }
 }
 
 vector<void*> PctrPlugin::getPlugins(){

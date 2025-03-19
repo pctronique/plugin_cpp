@@ -11,6 +11,7 @@ class PctrPlugin
 	public:
 		PctrPlugin(string nameInterf);
 		PctrPlugin loadPlugins(string folder = "");
+		void closeLoad();
 		vector<void*> getPlugins();
 	private:
 		vector<void*> all_plugin;
