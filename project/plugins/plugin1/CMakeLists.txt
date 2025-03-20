@@ -11,8 +11,6 @@ set(LIB_TEST_PLUGIN1 plugin1)
 
 set (CMAKE_SHARED_LINKER_FLAGS "-Wl,--as-needed")
 
-set (CMAKE_SHARED_LINKER_FLAGS "-Wl,--as-needed")
-
 set(PATH_DIST ${TEST_PLUGIN1_SOURCE_DIR}/../../dist)
 set(LIBRARY_OUTPUT_PATH ${PATH_DIST}/bin/plugins/)
 

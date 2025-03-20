@@ -8,21 +8,25 @@
 #else
     #include <dlfcn.h>
 #endif
-#include <AddPluginInterface.hpp>
-#include <Main_plugin.hpp>
+#include <PctrPlugin.hpp>
+
+#ifdef _WIN32
+    HINSTANCE plibobj;
+#else
+    void* plibobj;
+#endif
 
 using namespace std;
 namespace fs = filesystem;
-typedef AddPluginInterface *(*maker_AddPluginInterface)();
+typedef void* (*maker_Plugin)();
 
-Main_plugin Main_plugin::loadPlugins(string folder) {
-	#ifdef _WIN32
-		HINSTANCE plibobj;
-	#else
-		void* plibobj;
-	#endif
+PctrPlugin::PctrPlugin(string nameInterf) {
+    nameInterfLd = nameInterf;
+}
+
+PctrPlugin PctrPlugin::loadPlugins(string folder) {
     string func;
-    func = "make_AddPluginInterface";
+    func = "make_"+nameInterfLd;
     if(folder.c_str() != NULL && folder != "") {
         path = folder;
     }
@@ -44,36 +48,38 @@ Main_plugin Main_plugin::loadPlugins(string folder) {
             } else {
                 // Here we get the pointer of our target function, it is just a pointer to an undefined object
                 #ifdef _WIN32
-                    maker_AddPluginInterface psqr = (maker_AddPluginInterface)GetProcAddress(plibobj, "make_AddPluginInterface");
+                    maker_Plugin psqr = (maker_Plugin)GetProcAddress(plibobj, func.c_str());
                 #else
-                    maker_AddPluginInterface psqr = (maker_AddPluginInterface)dlsym(plibobj, "make_AddPluginInterface");
+                    maker_Plugin psqr = (maker_Plugin)dlsym(plibobj, func.c_str());
                 #endif
                 
                 // Again, if there is an error accessing the symbol, output it and exit
                 if (psqr == NULL) {
                     #ifdef _WIN32
-                        cerr << "Error accessing the symbol:" << func << "\n";
+                        cerr << "Error accessing the symbol:" << func.c_str() << "\n";
                     #else
-                        cerr << "Error accessing the symbol:" << func << dlerror() << "\n";
+                        cerr << "Error accessing the symbol:" << func.c_str() << dlerror() << "\n";
                     #endif
                 } else {
-                    AddPluginInterface* addPluginInterface = psqr();
-                    all_plugin.push_back(addPluginInterface);
+                    void* pluginOne = psqr();
+                    all_plugin.push_back(pluginOne);
                 }
             }
-            #ifdef _WIN32
-                FreeLibrary(plibobj);
-            #else
-                dlclose(plibobj);
-            #endif
-            //dlclose(plibobj);
         }
     }
     return *this;
 }
 
-vector<AddPluginInterface*> Main_plugin::getPlugins(){
-    return all_plugin;
+void PctrPlugin::closeLoad() {
+    if(plibobj != NULL) {
+        #ifdef _WIN32
+            FreeLibrary(plibobj);
+        #else
+            dlclose(plibobj);
+        #endif
+    }
 }
 
-
+vector<void*> PctrPlugin::getPlugins(){
+    return all_plugin;
+}
